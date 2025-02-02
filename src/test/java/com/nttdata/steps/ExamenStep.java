@@ -50,18 +50,7 @@ public class ExamenStep {
     public void validateStatusCode(int statusCode) {
         Assert.assertEquals(statusCode, SerenityRest.lastResponse().getStatusCode());
     }
-
-   /* public void ValidarBody(int id, int petId, int quantity, String status) {
-        int responseId = SerenityRest.lastResponse().getBody().path("id");
-        int responsePetId = SerenityRest.lastResponse().getBody().path("petId");
-        int responseQuantity = SerenityRest.lastResponse().getBody().path("quantity");
-        String responseStatus = SerenityRest.lastResponse().getBody().path("status");
-        Assert.assertEquals(responseId, id);
-        Assert.assertEquals(responsePetId, petId);
-        Assert.assertEquals(responseQuantity, quantity);
-        Assert.assertEquals(responseStatus, status);
-    }*/
-
+    
     public void ValidarBody(int id, int petId, int quantity, String status) {
         ValidatableResponse response = SerenityRest.lastResponse().then();
         String responseBody = SerenityRest.lastResponse().getBody().asString();
