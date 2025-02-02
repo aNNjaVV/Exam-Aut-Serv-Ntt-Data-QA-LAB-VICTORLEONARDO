@@ -48,9 +48,15 @@ public class ExamenStep {
     }
 
     public void validateStatusCode(int statusCode) {
-        Assert.assertEquals(statusCode, SerenityRest.lastResponse().getStatusCode());
-    }
-    
+        int actualStatusCode = SerenityRest.lastResponse().getStatusCode();
+        try {
+            Assert.assertEquals("ERROR: El código de estado no coincide.", statusCode, actualStatusCode);
+            System.out.println(" CORRECTO: El código de estado es correcto (" + actualStatusCode + ").");
+        } catch (AssertionError e) {
+            System.err.println("ERROR: Se espera el código " + statusCode + " pero se recibió " + actualStatusCode + ".");
+            throw e;
+        }    }
+
     public void ValidarBody(int id, int petId, int quantity, String status) {
         ValidatableResponse response = SerenityRest.lastResponse().then();
         String responseBody = SerenityRest.lastResponse().getBody().asString();
